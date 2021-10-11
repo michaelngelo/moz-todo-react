@@ -4,6 +4,12 @@ import Form from "./components/Form";
 import Todo from "./components/Todo";
 import { nanoid } from "nanoid";
 
+const DATA = [
+  { id: "todo-0", name: "Eat", completed: true },
+  { id: "todo-1", name: "Sleep", completed: false },
+  { id: "todo-2", name: "Repeat", completed: false },
+];
+
 const FILTER_MAP = {
   All: () => true,
   Active: task => !task.completed,
@@ -11,7 +17,7 @@ const FILTER_MAP = {
 };
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
-function App(props) {
+function App() {
   const [filter, setFilter] = useState('All');
   const filterList = FILTER_NAMES.map(name => (
     <FilterButton
@@ -22,7 +28,7 @@ function App(props) {
     />
   ));
 
-  const [tasks, setTasks] = useState(props.tasks);
+  const [tasks, setTasks] = useState(DATA);
 
   function addTask(name) {
     const newTask = {
@@ -82,7 +88,7 @@ function App(props) {
 
   return (
     <div className="todoapp stack-large">
-      <h1>TodoMatic</h1>
+      <h1>Todo React</h1>
       <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">
         {filterList}
